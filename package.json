@@ -1,0 +1,24 @@
+{
+  "name": "my-case-system",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "element-plus": "^2.13.6",
+    "leancloud-storage": "^4.15.2",
+    "marked": "^17.0.5",
+    "three": "^0.183.2",
+    "vue": "^3.5.30",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.5",
+    "sass": "^1.98.0",
+    "vite": "^8.0.1"
+  }
+}
