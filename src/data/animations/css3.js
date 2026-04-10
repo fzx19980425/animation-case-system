@@ -81,18 +81,18 @@ const css3Animations = [
       },
       {
         name: "摇摆动画",
-        code: `.swing {
-    animation: swing 2s infinite;
-    transform-origin: top center;
+        code: `.wobble {
+    animation: wobble 2s infinite;
 }
 
-@keyframes swing {
-    0% { transform: rotate(0deg); }
-    20% { transform: rotate(10deg); }
-    40% { transform: rotate(-10deg); }
-    60% { transform: rotate(5deg); }
-    80% { transform: rotate(-5deg); }
-    100% { transform: rotate(0deg); }
+@keyframes wobble {
+    0% { transform: translateX(0%); }
+    15% { transform: translateX(-25%) rotate(-5deg); }
+    30% { transform: translateX(20%) rotate(3deg); }
+    45% { transform: translateX(-15%) rotate(-3deg); }
+    60% { transform: translateX(10%) rotate(2deg); }
+    75% { transform: translateX(-5%) rotate(-1deg); }
+    100% { transform: translateX(0%); }
 }`,
       },
       {
@@ -622,45 +622,6 @@ const css3Animations = [
     description: "CSS 变换的各种应用，包括旋转、缩放、平移等",
     effects: [
       {
-        name: "位移效果",
-        code: `.translate-effect {
-  width: 100px;
-  height: 100px;
-  background-color: #3498db;
-  transition: transform 0.3s ease;
-}
-
-.translate-effect:hover {
-  transform: translate(20px, 20px);
-}`,
-      },
-      {
-        name: "缩放效果",
-        code: `.scale-effect {
-  width: 100px;
-  height: 100px;
-  background-color: #3498db;
-  transition: transform 0.3s ease;
-}
-
-.scale-effect:hover {
-  transform: scale(1.2);
-}`,
-      },
-      {
-        name: "旋转效果",
-        code: `.rotate-effect {
-  width: 100px;
-  height: 100px;
-  background-color: #3498db;
-  transition: transform 0.3s ease;
-}
-
-.rotate-effect:hover {
-  transform: rotate(15deg);
-}`,
-      },
-      {
         name: "倾斜变换",
         code: `.skew-effect {
   width: 100px;
@@ -781,6 +742,70 @@ const css3Animations = [
 
 .multiple-filters:hover {
     filter: blur(0) grayscale(0) contrast(100%);
+}`,
+      },
+    ],
+  },
+  {
+    id: 31,
+    title: "CSS 经典微交互",
+    category: "css3",
+    cover:
+      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=CSS%20micro%20interaction%20button%20and%20list%20animation&image_size=square_hd",
+    description: "高频业务场景下可直接复用的轻量 CSS 动效",
+    effects: [
+      {
+        name: "按钮悬停反馈",
+        code: `.button-hover-feedback {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, #5b8cff, #6a5cff);
+  box-shadow: 0 6px 16px rgba(91, 140, 255, 0.25);
+  transition: transform .24s ease, box-shadow .24s ease, filter .24s ease;
+}
+
+.button-hover-feedback:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(91, 140, 255, 0.35);
+  filter: brightness(1.05);
+}
+
+.button-hover-feedback:active {
+  transform: translateY(0) scale(0.98);
+}`,
+      },
+      {
+        name: "列表入场错峰",
+        code: `.stagger-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.stagger-list li {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: listIn .5s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.stagger-list li:nth-child(1) { animation-delay: 0.04s; }
+.stagger-list li:nth-child(2) { animation-delay: 0.1s; }
+.stagger-list li:nth-child(3) { animation-delay: 0.16s; }
+.stagger-list li:nth-child(4) { animation-delay: 0.22s; }
+.stagger-list li:nth-child(5) { animation-delay: 0.28s; }
+
+@keyframes listIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }`,
       },
     ],

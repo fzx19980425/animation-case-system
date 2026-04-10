@@ -755,57 +755,6 @@ export const css3Demos = {
       }
     </style>
   `,
-  位移效果: `
-    <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f5f5f5; border-radius: 8px;">
-      <div class="translate-effect"></div>
-    </div>
-    <style>
-      .translate-effect {
-        width: 100px;
-        height: 100px;
-        background-color: #9b59b6;
-        transform: translate(0, 0);
-        transition: transform 0.5s ease;
-      }
-      .translate-effect:hover {
-        transform: translate(100px, 50px);
-      }
-    </style>
-  `,
-  缩放效果: `
-    <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f5f5f5; border-radius: 8px;">
-      <div class="scale-card"></div>
-    </div>
-    <style>
-      .scale-card {
-        width: 200px;
-        height: 200px;
-        background-color: #e74c3c;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
-      }
-      .scale-card:hover {
-        transform: scale(1.1);
-      }
-    </style>
-  `,
-  旋转效果: `
-    <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f5f5f5; border-radius: 8px;">
-      <div class="rotate-card"></div>
-    </div>
-    <style>
-      .rotate-card {
-        width: 200px;
-        height: 200px;
-        background-color: #f39c12;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
-      }
-      .rotate-card:hover {
-        transform: rotate(5deg);
-      }
-    </style>
-  `,
   倾斜变换: `
     <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f5f5f5; border-radius: 8px;">
       <div class="skew-transform"></div>
@@ -957,6 +906,78 @@ export const css3Demos = {
       }
       .multiple-filters:hover {
         filter: blur(0) grayscale(0) contrast(100%);
+      }
+    </style>
+  `,
+  按钮悬停反馈: `
+    <div style="display:flex;align-items:center;justify-content:center;height:400px;background:#f5f5f5;border-radius:8px;">
+      <button class="button-hover-feedback">
+        <span>立即开始</span>
+      </button>
+    </div>
+    <style>
+      .button-hover-feedback {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        background: linear-gradient(135deg, #5b8cff, #6a5cff);
+        box-shadow: 0 6px 16px rgba(91, 140, 255, 0.25);
+        cursor: pointer;
+        transition: transform .24s ease, box-shadow .24s ease, filter .24s ease;
+      }
+      .button-hover-feedback:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(91, 140, 255, 0.35);
+        filter: brightness(1.05);
+      }
+      .button-hover-feedback:active {
+        transform: translateY(0) scale(0.98);
+      }
+    </style>
+  `,
+  列表入场错峰: `
+    <div style="display:flex;align-items:center;justify-content:center;height:400px;background:#f5f5f5;border-radius:8px;">
+      <ul class="stagger-list">
+        <li>页面加载性能优化</li>
+        <li>动效分层治理</li>
+        <li>统一组件规范</li>
+        <li>数据看板改版</li>
+        <li>品牌活动页上线</li>
+      </ul>
+    </div>
+    <style>
+      .stagger-list {
+        list-style: none;
+        width: 320px;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+      .stagger-list li {
+        background: #fff;
+        border-radius: 10px;
+        padding: 12px 14px;
+        color: #2f3442;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        opacity: 0;
+        transform: translateY(12px);
+        animation: listIn .5s cubic-bezier(.2,.8,.2,1) forwards;
+      }
+      .stagger-list li:nth-child(1) { animation-delay: 0.04s; }
+      .stagger-list li:nth-child(2) { animation-delay: 0.1s; }
+      .stagger-list li:nth-child(3) { animation-delay: 0.16s; }
+      .stagger-list li:nth-child(4) { animation-delay: 0.22s; }
+      .stagger-list li:nth-child(5) { animation-delay: 0.28s; }
+      @keyframes listIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     </style>
   `,

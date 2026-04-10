@@ -14,6 +14,9 @@ importers:
       leancloud-storage:
         specifier: ^4.15.2
         version: 4.15.2
+      lottie-web:
+        specifier: ^5.13.0
+        version: 5.13.0
       marked:
         specifier: ^17.0.5
         version: 17.0.6
@@ -763,6 +766,9 @@ packages:
   long@3.2.0:
     resolution: {integrity: sha512-ZYvPPOMqUwPoDsbJaR10iQJYnMuZhRTvHYl62ErLIEX7RgFlziSBUUvrt3OVfc47QlHHpzPZYP17g3Fv7oeJkg==}
     engines: {node: '>=0.6'}
+
+  lottie-web@5.13.0:
+    resolution: {integrity: sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -1738,6 +1744,8 @@ snapshots:
   lodash@4.18.1: {}
 
   long@3.2.0: {}
+
+  lottie-web@5.13.0: {}
 
   magic-string@0.30.21:
     dependencies:

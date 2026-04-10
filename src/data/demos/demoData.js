@@ -3,6 +3,7 @@ import { css3Demos } from "./css3Demos.js";
 import { svgDemos } from "./svgDemos.js";
 import { canvasDemos } from "./canvasDemos.js";
 import { gsapDemos } from "./gsapDemos.js";
+import { lottieDemos } from "./lottieDemos.js";
 import { interactiveDemos } from "./interactiveDemos.js";
 
 // 按类别组织演示数据
@@ -11,6 +12,7 @@ export const demoDataByCategory = {
   svg: svgDemos,
   canvas: canvasDemos,
   gsap: gsapDemos,
+  lottie: lottieDemos,
   interactive: interactiveDemos,
 };
 

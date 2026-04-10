@@ -11,7 +11,10 @@
       
       <!-- 动画演示区域 -->
       <div class="effect-demo">
-        <iframe v-if="caseItem.category === 'canvas' || caseItem.category === 'threejs' || caseItem.category === 'interactive' || caseItem.category === 'gsap' || caseItem.category === 'lottie'" class="demo-content" :srcdoc="getDemoHTML(selectedEffect.name, caseItem.category)" style="width: 100%; height: 400px; border: none; border-radius: 8px;"></iframe>
+        <iframe v-if="caseItem.category === 'canvas' || caseItem.category === 'threejs' || caseItem.category === 'interactive' || caseItem.category === 'gsap'" class="demo-content" :srcdoc="getDemoHTML(selectedEffect.name, caseItem.category)" style="width: 100%; height: 400px; border: none; border-radius: 8px;"></iframe>
+        <div v-else-if="caseItem.category === 'lottie'" class="demo-content lottie-inline-demo">
+          <div ref="lottieContainerRef" class="lottie-container"></div>
+        </div>
         <div v-else class="demo-content" v-html="getDemoHTML(selectedEffect.name, caseItem.category)"></div>
       </div>
       
@@ -32,16 +35,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, watch, computed, nextTick, onBeforeUnmount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { caseData } from '../data/caseList'
 import { getDemoHTML } from '../data/demos/demoData'
+import lottie from 'lottie-web'
+import loadingJson from '../data/json/loading.json'
 
 const router = useRouter()
 const route = useRoute()
 const caseItem = ref(null)
 const codeVisible = ref(false)
 const selectedEffectIndex = ref(0)
+const lottieContainerRef = ref(null)
+let lottieInstance = null
 
 onMounted(() => {
   loadCaseDetail()
@@ -68,9 +75,32 @@ const loadCaseDetail = async () => {
     } else {
       selectedEffectIndex.value = 0
     }
+    await nextTick()
+    mountLottieIfNeeded()
   } catch (error) {
     console.error('加载案例详情失败:', error)
   }
+}
+
+const destroyLottie = () => {
+  if (lottieInstance) {
+    lottieInstance.destroy()
+    lottieInstance = null
+  }
+}
+
+const mountLottieIfNeeded = () => {
+  destroyLottie()
+  if (!caseItem.value || caseItem.value.category !== 'lottie' || !lottieContainerRef.value) return
+  lottieContainerRef.value.innerHTML = ''
+  lottieInstance = lottie.loadAnimation({
+    container: lottieContainerRef.value,
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    animationData: loadingJson,
+    rendererSettings: { preserveAspectRatio: 'xMidYMid meet' },
+  })
 }
 
 // 选中的效果
@@ -90,6 +120,15 @@ const toggleCode = () => {
 const goBack = () => {
   router.push('/')
 }
+
+watch(selectedEffectIndex, async () => {
+  await nextTick()
+  mountLottieIfNeeded()
+})
+
+onBeforeUnmount(() => {
+  destroyLottie()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -115,6 +154,26 @@ const goBack = () => {
     border-radius: 8px;
     overflow: hidden;
   }
+}
+
+.lottie-inline-demo {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.lottie-container {
+  width: 260px;
+  height: 260px;
+}
+
+.lottie-tip {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
 }
 
 .code-section {

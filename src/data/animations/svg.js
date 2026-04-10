@@ -259,4 +259,54 @@ export const svgAnimations = [
       },
     ],
   },
+  {
+    id: 32,
+    title: "SVG 经典可缩放动效",
+    category: "svg",
+    cover:
+      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=SVG%20logo%20draw%20and%20ring%20progress%20animation&image_size=square_hd",
+    description: "适用于图标、品牌线稿与进度表达的 SVG 动画",
+    effects: [
+      {
+        name: "Logo 描边入场",
+        code: `<svg viewBox="0 0 320 120" width="320" height="120">
+  <path d="M40 90 L90 30 L140 90 Z" fill="none" stroke="#4f7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="205" cy="60" r="32" fill="none" stroke="#4f7cff" stroke-width="8" />
+  <path d="M190 60 L203 73 L222 47" fill="none" stroke="#4f7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+<style>
+svg path, svg circle {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: draw 1.2s ease forwards;
+}
+svg circle { animation-delay: .25s; }
+svg path:last-child { animation-delay: .45s; }
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+</style>`,
+      },
+      {
+        name: "路径进度环",
+        code: `<svg viewBox="0 0 160 160" width="160" height="160">
+  <circle cx="80" cy="80" r="58" fill="none" stroke="#e9edf6" stroke-width="12" />
+  <circle class="ring-progress" cx="80" cy="80" r="58" fill="none" stroke="#20c997" stroke-width="12" stroke-linecap="round" />
+  <text x="80" y="88" text-anchor="middle" font-size="26" fill="#2b2f36">72%</text>
+</svg>
+<style>
+.ring-progress {
+  stroke-dasharray: 364;
+  stroke-dashoffset: 364;
+  transform: rotate(-90deg);
+  transform-origin: 80px 80px;
+  animation: progress 1.6s cubic-bezier(.22,.61,.36,1) forwards;
+}
+@keyframes progress {
+  to { stroke-dashoffset: 102; }
+}
+</style>`,
+      },
+    ],
+  },
 ];

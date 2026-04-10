@@ -680,4 +680,95 @@ export const canvasDemos = {
     </body>
     </html>
   `,
+  流体拖尾光标: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background: #f5f5f5; }
+      </style>
+    </head>
+    <body>
+      <canvas id="canvas" width="400" height="200" style="border: 1px solid #ddd; background:#fff;"></canvas>
+      <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const pointer = { x: canvas.width / 2, y: canvas.height / 2 };
+        const trail = [];
+        const TRAIL_SIZE = 36;
+        canvas.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          pointer.x = e.clientX - rect.left;
+          pointer.y = e.clientY - rect.top;
+        });
+        function loop() {
+          trail.unshift({ x: pointer.x, y: pointer.y, life: 1 });
+          if (trail.length > TRAIL_SIZE) trail.pop();
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          trail.forEach((p, i) => {
+            const ratio = 1 - i / TRAIL_SIZE;
+            const radius = 24 * ratio;
+            const alpha = 0.16 * ratio;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(79,124,255,' + alpha.toFixed(3) + ')';
+            ctx.fill();
+          });
+          ctx.beginPath();
+          ctx.arc(pointer.x, pointer.y, 4, 0, Math.PI * 2);
+          ctx.fillStyle = '#355dff';
+          ctx.fill();
+          requestAnimationFrame(loop);
+        }
+        loop();
+      </script>
+    </body>
+    </html>
+  `,
+  动态柱状图轮播: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background: #f5f5f5; }
+      </style>
+    </head>
+    <body>
+      <canvas id="canvas" width="400" height="200" style="border: 1px solid #ddd; background:#fff;"></canvas>
+      <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const bars = Array.from({ length: 12 }, () => 30 + Math.random() * 100);
+        function drawGrid() {
+          ctx.strokeStyle = '#eef2f8';
+          for (let y = 20; y <= 180; y += 40) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+          }
+        }
+        function tick() {
+          for (let i = 0; i < bars.length; i++) {
+            const target = 30 + Math.random() * 120;
+            bars[i] += (target - bars[i]) * 0.08;
+          }
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          drawGrid();
+          const gap = 10;
+          const width = (canvas.width - gap * (bars.length + 1)) / bars.length;
+          bars.forEach((value, i) => {
+            const x = gap + i * (width + gap);
+            const h = value;
+            const y = canvas.height - h - 12;
+            ctx.fillStyle = 'rgba(32, 201, 151, 0.85)';
+            ctx.fillRect(x, y, width, h);
+          });
+          requestAnimationFrame(tick);
+        }
+        tick();
+      </script>
+    </body>
+    </html>
+  `,
 };

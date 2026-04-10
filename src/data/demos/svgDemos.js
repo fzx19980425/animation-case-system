@@ -231,4 +231,46 @@ export const svgDemos = {
       </svg>
     </div>
   `,
+  "Logo 描边入场": `
+    <div style="display:flex;align-items:center;justify-content:center;height:400px;background:#f5f5f5;border-radius:8px;">
+      <svg viewBox="0 0 320 120" width="320" height="120">
+        <path class="logo-draw-1" d="M40 90 L90 30 L140 90 Z" fill="none" stroke="#4f7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <circle class="logo-draw-2" cx="205" cy="60" r="32" fill="none" stroke="#4f7cff" stroke-width="8" />
+        <path class="logo-draw-3" d="M190 60 L203 73 L222 47" fill="none" stroke="#4f7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <style>
+      .logo-draw-1, .logo-draw-2, .logo-draw-3 {
+        stroke-dasharray: 260;
+        stroke-dashoffset: 260;
+        animation: draw 1.2s ease forwards;
+      }
+      .logo-draw-2 { animation-delay: .25s; }
+      .logo-draw-3 { animation-delay: .45s; }
+      @keyframes draw {
+        to { stroke-dashoffset: 0; }
+      }
+    </style>
+  `,
+  路径进度环: `
+    <div style="display:flex;align-items:center;justify-content:center;height:400px;background:#f5f5f5;border-radius:8px;">
+      <svg viewBox="0 0 160 160" width="160" height="160">
+        <circle cx="80" cy="80" r="58" fill="none" stroke="#e9edf6" stroke-width="12" />
+        <circle class="ring-progress" cx="80" cy="80" r="58" fill="none" stroke="#20c997" stroke-width="12" stroke-linecap="round" />
+        <text x="80" y="88" text-anchor="middle" font-size="26" fill="#2b2f36">72%</text>
+      </svg>
+    </div>
+    <style>
+      .ring-progress {
+        stroke-dasharray: 364;
+        stroke-dashoffset: 364;
+        transform: rotate(-90deg);
+        transform-origin: 80px 80px;
+        animation: progress 1.6s cubic-bezier(.22,.61,.36,1) forwards;
+      }
+      @keyframes progress {
+        to { stroke-dashoffset: 102; }
+      }
+    </style>
+  `,
 };

@@ -170,10 +170,12 @@ export const gsapDemos = {
   `,
   路径动画: `
     <div style="display: flex; align-items: center; justify-content: center; height: 384px; background: #f5f5f5; border-radius: 8px;">
-      <svg width="400" height="300" viewBox="0 0 400 300" style="position: relative;">
+      <div style="position: relative; width: 400px; height: 300px;">
+        <svg width="400" height="300" viewBox="0 0 400 300">
         <path class="path" d="M50,150 Q200,50 350,150" fill="none" stroke="#ddd" stroke-width="2"/>
+        </svg>
         <div class="box" style="width: 20px; height: 20px; background: #e74c3c; position: absolute; top: 140px; left: 45px; border-radius: 50%;"></div>
-      </svg>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
@@ -250,6 +252,46 @@ export const gsapDemos = {
           ease: 'linear',
           repeat: -1
       });
+    </script>
+  `,
+  "Hero 分层入场": `
+    <div class="hero-wrap" style="height:384px;display:grid;place-items:center;background:linear-gradient(120deg,#eef3ff,#f6f8ff);border-radius:8px;">
+      <div style="width:88%;max-width:760px;display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:center;">
+        <div>
+          <span class="hero-badge" style="display:inline-block;padding:4px 10px;background:#dfe7ff;color:#4f5bd5;border-radius:999px;font-size:12px;">Animation Library</span>
+          <h2 class="hero-title" style="margin:14px 0 10px;color:#1f2430;">为页面建立可复用动效系统</h2>
+          <p class="hero-sub" style="margin:0 0 16px;color:#5f6572;">统一反馈、滚动叙事与品牌动态表达，沉淀可维护的动效资产。</p>
+          <button class="hero-cta" style="border:none;background:#4f7cff;color:#fff;border-radius:8px;padding:10px 14px;cursor:pointer;">查看案例</button>
+        </div>
+        <div class="hero-card" style="height:150px;border-radius:14px;background:#fff;box-shadow:0 12px 26px rgba(79,124,255,.16);display:grid;place-items:center;color:#4f7cff;font-weight:600;">Timeline Scene</div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script>
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl
+        .from('.hero-badge', { y: -20, opacity: 0, duration: 0.45 })
+        .from('.hero-title', { y: 28, opacity: 0, duration: 0.7 }, '-=0.2')
+        .from('.hero-sub', { y: 20, opacity: 0, duration: 0.55 }, '-=0.35')
+        .from('.hero-cta', { scale: 0.9, opacity: 0, duration: 0.4 }, '-=0.3')
+        .from('.hero-card', { x: 40, opacity: 0, duration: 0.7 }, '-=0.45');
+    </script>
+  `,
+  滚动章节叙事: `
+    <div class="story" style="height:384px;background:#f5f5f5;border-radius:8px;position:relative;overflow:hidden;">
+      <div class="story-scene-1" style="position:absolute;inset:0;display:grid;place-items:center;font-size:28px;color:#4f7cff;">章节 1：问题背景</div>
+      <div class="story-scene-2" style="position:absolute;inset:0;display:grid;place-items:center;font-size:28px;color:#20c997;opacity:0;">章节 2：方案推演</div>
+      <div class="story-scene-3" style="position:absolute;inset:0;display:grid;place-items:center;font-size:28px;color:#f39c12;opacity:0;">章节 3：成果展示</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script>
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+      tl
+        .to('.story-scene-1', { opacity: 0, y: -40, duration: 1 })
+        .fromTo('.story-scene-2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1 }, '<')
+        .to('.story-scene-2', { opacity: 0, scale: 0.95, duration: 1 })
+        .fromTo('.story-scene-3', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 1 }, '<')
+        .to('.story-scene-3', { opacity: 0, duration: 0.8 });
     </script>
   `,
 };

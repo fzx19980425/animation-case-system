@@ -62,4 +62,22 @@ export const gsapAnimations = [
       },
     ],
   },
+  {
+    id: 34,
+    title: "GSAP 场景编排案例",
+    category: "gsap",
+    cover:
+      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=GSAP%20hero%20timeline%20and%20scroll%20storytelling&image_size=square_hd",
+    description: "复杂时间轴与滚动叙事的经典模板",
+    effects: [
+      {
+        name: "Hero 分层入场",
+        code: "// Hero 分层入场\nimport gsap from 'gsap';\n\nconst tl = gsap.timeline({ defaults: { ease: 'power3.out' } });\ntl\n  .from('.hero-badge', { y: -20, opacity: 0, duration: 0.45 })\n  .from('.hero-title', { y: 28, opacity: 0, duration: 0.7 }, '-=0.2')\n  .from('.hero-sub', { y: 20, opacity: 0, duration: 0.55 }, '-=0.35')\n  .from('.hero-cta', { scale: 0.9, opacity: 0, duration: 0.4 }, '-=0.3')\n  .from('.hero-card', { x: 40, opacity: 0, duration: 0.7 }, '-=0.45');",
+      },
+      {
+        name: "滚动章节叙事",
+        code: "// 滚动章节叙事\nimport gsap from 'gsap';\nimport { ScrollTrigger } from 'gsap/ScrollTrigger';\n\ngsap.registerPlugin(ScrollTrigger);\n\nconst tl = gsap.timeline({\n  scrollTrigger: {\n    trigger: '.story',\n    start: 'top top',\n    end: '+=1800',\n    scrub: true,\n    pin: true,\n  },\n});\n\ntl\n  .to('.story-scene-1', { opacity: 0, y: -40, duration: 1 })\n  .fromTo('.story-scene-2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1 }, '<')\n  .to('.story-scene-2', { opacity: 0, scale: 0.95, duration: 1 })\n  .fromTo('.story-scene-3', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 1 }, '<');",
+      },
+    ],
+  },
 ];
